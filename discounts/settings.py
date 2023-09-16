@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 import os
 from pathlib import Path
+
 from celery.schedules import crontab
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,9 +26,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG') == 'True'
+DEBUG = os.getenv("DEBUG") == "True"
 
-ALLOWED_HOSTS = ['host.docker.internal', "localhost"]
+ALLOWED_HOSTS = ["host.docker.internal", "localhost"]
 
 
 # Application definition
@@ -133,8 +134,8 @@ CELERY_BROKER_URL = "redis://redis:6379/0"
 CELERY_RESULT_BACKEND = "redis://redis:6379/0"
 
 CELERY_BEAT_SCHEDULE = {
-    'fetch_data': {
-        'task': 'notifications.tasks.fetch_data',
-        'schedule': crontab(minute=0, hour=19),
+    "fetch_data": {
+        "task": "notifications.tasks.fetch_data",
+        "schedule": crontab(minute=0, hour=19),
     },
 }
