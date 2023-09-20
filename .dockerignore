@@ -1,0 +1,10 @@
+venv/
+data/
+.vscode/
+
+Dockerfile
+docker-compose.yml
+readme.md
+celerybeat-schedule
+
+.gitignore

@@ -22,7 +22,7 @@ services:
     env_file:
       - .env
     volumes:
-      - .:/app
+      - ./app:/app
     ports:
       - "8001:8000"
     depends_on:
@@ -30,13 +30,15 @@ services:
         condition: service_healthy
   redis:
     image: redis:alpine
+    ports:
+      - "6380:6379"
   celery:
     restart: always
     build:
       context: .
-    command: celery -A discounts worker -l info
+    command: celery -A app worker -l info
     volumes:
-      - .:/app
+      - ./app:/app
     env_file:
       - .env
     depends_on:
@@ -47,9 +49,9 @@ services:
     restart: always
     build:
       context: .
-    command: celery -A discounts beat -l info
+    command: celery -A app beat -l info
     volumes:
-      - .:/app
+      - ./app:/app
     env_file:
       - .env
     depends_on:
