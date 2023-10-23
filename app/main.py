@@ -1,6 +1,7 @@
 import asyncio
 import math
 import sqlite3
+import time
 from string import Template
 
 import aiohttp
@@ -72,8 +73,11 @@ async def main():
             tasks.append(task)
         results = await asyncio.gather(*tasks)
         results = [item for item in results if item]
+        max_items = 3
         if results:
-            await send_message("\n".join(results))
+            for i in range(0, len(results), max_items):
+                await send_message("\n".join(results[i : i + max_items]))
+                time.sleep(10)
 
 
 loop = asyncio.get_event_loop()
