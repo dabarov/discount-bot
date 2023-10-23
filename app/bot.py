@@ -10,3 +10,4 @@ TOKEN = getenv("BOT_TOKEN")
 async def send_message(message) -> None:
     bot = Bot(TOKEN, parse_mode=ParseMode.HTML)
     await bot.send_message(getenv("CHAT_ID"), message)
+    await bot.close()

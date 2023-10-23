@@ -54,6 +54,7 @@ async def get_laptops(limit: int = 10, page: int = 1):
                         (int(item_id), price),
                     )
                     connection.commit()
+                    session.close()
                     return f"https://www.technodom.kz/p/{uri} {price} {item_last_price_row}"
     return ""
 
