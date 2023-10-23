@@ -76,7 +76,10 @@ async def main():
         max_items = 3
         if results:
             for i in range(0, len(results), max_items):
-                await send_message("\n".join(results[i : i + max_items]))
+                try:
+                    await send_message("\n".join(results[i : i + max_items]))
+                except:
+                    pass
                 time.sleep(10)
 
 
